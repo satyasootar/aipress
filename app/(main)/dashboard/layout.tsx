@@ -8,9 +8,9 @@ export default async function DashboardLayout({
   await requireAuth();
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between border-b pb-4">
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+    <div className="container mx-auto px-4 lg:px-8 py-12 max-w-5xl">
+      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-8 border-dashed">
+        <h1 className="text-3xl md:text-4xl font-serif text-white tracking-tight uppercase">Dashboard</h1>
       </div>
       {children}
     </div>

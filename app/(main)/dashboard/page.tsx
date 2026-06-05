@@ -18,10 +18,17 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">Your Posts</h2>
+      <div className="flex justify-between items-end mb-6">
+        <div className="flex flex-col">
+          <h2 className="text-[11px] sm:text-xs font-bold tracking-[0.15em] text-gray-400 uppercase font-sans mb-1">
+            Overview
+          </h2>
+          <h3 className="text-2xl font-serif text-white">Your Posts</h3>
+        </div>
         <Link href="/dashboard/new">
-          <Button>Create Post</Button>
+          <Button className="bg-white text-black hover:bg-gray-200 font-serif tracking-wide rounded-sm px-6">
+            Write a Story
+          </Button>
         </Link>
       </div>
       <DashboardTable posts={posts} />

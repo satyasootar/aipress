@@ -31,6 +31,9 @@ export default async function Navbar() {
               <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors">
                 Dashboard
               </Link>
+              <Link href="/profile" className="text-gray-300 hover:text-white transition-colors">
+                Profile
+              </Link>
               <form action={logout}>
                 <button type="submit" className="text-gray-300 hover:text-white transition-colors">
                   Logout

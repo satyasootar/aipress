@@ -12,6 +12,8 @@ model User {
   password  String
   name      String?
   posts     Post[]
+  comments  Comment[]
+  likes     Like[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -23,8 +25,36 @@ model Post {
   published Boolean  @default(false)
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
+  comments  Comment[]
+  likes     Like[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([authorId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  authorId  String
+  postId    String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
+  @@index([postId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  authorId  String
+  postId    String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([authorId, postId])
+  @@index([postId])
 }

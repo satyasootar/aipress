@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 const initialState = { error: "", success: false };
@@ -58,10 +59,16 @@ export default function LoginForm() {
             </div>
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-col gap-4">
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? "Logging in..." : "Login"}
           </Button>
+          <div className="text-sm text-center text-gray-400 font-sans mt-2">
+            Don't have an account?{" "}
+            <Link href="/signup" className="text-white hover:underline underline-offset-4">
+              Create one
+            </Link>
+          </div>
         </CardFooter>
       </form>
     </Card>

@@ -4,15 +4,10 @@ import { Button } from "@/components/ui/button";
 
 export default function NewPostPage() {
   return (
-    <div className="space-y-4 max-w-2xl">
-      <div className="flex items-center gap-4">
-        <Link href="/dashboard">
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
-            &larr; Back
-          </Button>
-        </Link>
-        <h2 className="text-xl font-semibold">Create New Post</h2>
-      </div>
+    <div className="space-y-4 w-full">
+      <Link href="/dashboard" className="text-gray-400 hover:text-white uppercase tracking-widest text-xs font-sans inline-block mb-4 transition-colors">
+        &larr; Back to Overview
+      </Link>
       <CreatePostForm />
     </div>
   );

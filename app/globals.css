@@ -141,14 +141,12 @@
 
 @layer utilities {
   .border-dashed-faint {
+    border-color: rgba(255, 255, 255, 0.1);
     border-style: dashed;
-    border-color: rgba(255, 255, 255, 0.15);
-    border-width: 1px;
   }
   .border-solid-faint {
+    border-color: rgba(255, 255, 255, 0.1);
     border-style: solid;
-    border-color: rgba(255, 255, 255, 0.15);
-    border-width: 1px;
   }
   .vintage-image-filter {
     filter: sepia(0.3) contrast(1.2) saturate(1.1);
