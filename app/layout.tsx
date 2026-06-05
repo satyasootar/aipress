@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
+
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  title: "The Prismic Blog",
-  description: "Nail your workflow.",
+  title: "AIPRESS - Stories, software, podcasts",
+  description: "Courses to help you build the future.",
 };
 
 export default function RootLayout({
@@ -22,13 +26,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} font-sans h-full antialiased`}
+      className={`${inter.variable} ${playfair.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-white text-slate-900" suppressHydrationWarning>
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
+      <body className="min-h-full flex flex-col bg-black text-gray-100 font-sans" suppressHydrationWarning>
+        {children}
         <Toaster />
       </body>
     </html>

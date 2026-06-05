@@ -91,43 +91,45 @@
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
+  --background: oklch(0 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.141 0.005 285.823);
+  --card: oklch(0.05 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.141 0.005 285.823);
+  --popover: oklch(0.05 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.985 0 0);
   --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.286);
+  --secondary: oklch(0.15 0 0);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.286);
+  --muted: oklch(0.15 0 0);
   --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.286);
+  --accent: oklch(0.15 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.274 0.006 286.286);
-  --input: oklch(0.274 0.006 286.286);
+  --border: oklch(0.15 0 0);
+  --input: oklch(0.15 0 0);
   --ring: oklch(0.446 0.03 256.802);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
+  --sidebar: oklch(0.05 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.286);
+  --sidebar-accent: oklch(0.15 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.274 0.006 286.286);
+  --sidebar-border: oklch(0.15 0 0);
   --sidebar-ring: oklch(0.446 0.03 256.802);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: #333333 #000000;
   }
   body {
     @apply bg-background text-foreground;
@@ -138,6 +140,19 @@
 }
 
 @layer utilities {
+  .border-dashed-faint {
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+  }
+  .border-solid-faint {
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.15);
+    border-width: 1px;
+  }
+  .vintage-image-filter {
+    filter: sepia(0.3) contrast(1.2) saturate(1.1);
+  }
   .bg-dot-pattern {
     background-image: radial-gradient(#d1d5db 2px, transparent 2px);
     background-size: 24px 24px;
@@ -148,4 +163,20 @@
     transform: rotateX(60deg) rotateZ(-45deg);
     transform-style: preserve-3d;
   }
+}
+
+/* Custom Scrollbar for Dark Theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: #333333;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
 }
