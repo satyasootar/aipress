@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full-Stack Blog Platform
 
-## Getting Started
+This is a comprehensive full-stack blog application built to demonstrate modern Next.js 16 capabilities. 
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Authentication:** Custom JWT authentication with bcryptjs and httpOnly cookies.
+- **Database:** Prisma ORM connected to NeonDB (PostgreSQL).
+- **CRUD Operations:** Full create, read, update, and delete capabilities for blog posts.
+- **Validation:** Zod schemas used for robust input validation.
+- **UI:** Styled with Tailwind CSS and shadcn/ui components.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Details
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Rendering Strategies
+The application demonstrates all Next.js App Router rendering strategies where appropriate:
+- **SSG (Static Site Generation):** The landing page (`/`) is statically generated for maximum performance.
+- **ISR (Incremental Static Regeneration):** The public blog list (`/blog`) uses ISR (revalidated every 60 seconds) to balance performance and freshness.
+- **SSR (Server-Side Rendering):** Dynamic routes like the dashboard (`/dashboard`) and individual posts (`/blog/[id]`) are server-rendered to ensure the latest data is always displayed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### API Routes & Server Actions
+Both methodologies are implemented to fulfill evaluation requirements:
+- **API Routes (`/api/posts`):** A standard REST API suitable for external consumers, featuring proper HTTP status codes, structured JSON responses, and JWT middleware protection.
+- **Server Actions (`@/actions`):** Used internally for all form submissions and mutations (auth, post CRUD). They provide a seamless native Next.js developer experience, automatically integrating with `useActionState`, handling caching revalidation (`revalidatePath`), and performing server-side redirects.
 
-## Learn More
+## How to Run Locally
 
-To learn more about Next.js, take a look at the following resources:
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Environment Variables**
+   Copy `.env.example` to `.env.local` and fill in your NeonDB `DATABASE_URL` and `JWT_SECRET`.
+   ```bash
+   cp .env.example .env.local
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Database Setup**
+   Push the Prisma schema to your database.
+   ```bash
+   npx prisma db push
+   ```
 
-## Deploy on Vercel
+4. **Start the Server**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Navigate to `http://localhost:3000` to see the application running.
