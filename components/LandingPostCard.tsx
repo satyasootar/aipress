@@ -17,7 +17,7 @@ export default function LandingPostCard({ post, featured }: LandingPostCardProps
         {/* Abstract Isometric Shapes */}
         <div className="relative w-full h-full flex items-center justify-center">
           <div 
-            className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-lg isometric-cube opacity-90 transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-105"
+            className="absolute w-24 h-24 sm:w-32 sm:h-32 rounded-lg isometric-cube opacity-90 transition-transform duration-500 group-hover:-translate-y-2"
             style={{ backgroundColor: post.colorHex, boxShadow: "12px 12px 0px rgba(0,0,0,0.1)" }}
           ></div>
           <div 

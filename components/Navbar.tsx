@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { logout } from "@/actions/auth";
-import { Search } from "lucide-react";
+import SearchBar from "@/components/SearchBar";
 
 export default async function Navbar() {
   const session = await getSession();
@@ -12,9 +12,7 @@ export default async function Navbar() {
         
         {/* Left: Search */}
         <div className="flex-1 flex items-center">
-          <button className="text-gray-400 hover:text-white transition-colors">
-            <Search className="w-5 h-5" />
-          </button>
+          <SearchBar />
         </div>
 
         {/* Center: Logo */}
@@ -34,11 +32,6 @@ export default async function Navbar() {
               <Link href="/profile" className="text-gray-300 hover:text-white transition-colors">
                 Profile
               </Link>
-              <form action={logout}>
-                <button type="submit" className="text-gray-300 hover:text-white transition-colors">
-                  Logout
-                </button>
-              </form>
             </>
           ) : (
             <>

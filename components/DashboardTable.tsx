@@ -35,44 +35,47 @@ export default function DashboardTable({ posts }: { posts: Post[] }) {
   }
 
   return (
-    <div className="rounded-md border bg-white">
+    <div className="rounded-sm border border-white/10 bg-black">
       <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+        <TableHeader className="border-white/10">
+          <TableRow className="border-white/10 hover:bg-white/5">
+            <TableHead className="text-gray-400 font-sans tracking-wider uppercase text-xs">Title</TableHead>
+            <TableHead className="text-gray-400 font-sans tracking-wider uppercase text-xs">Status</TableHead>
+            <TableHead className="text-gray-400 font-sans tracking-wider uppercase text-xs">Date</TableHead>
+            <TableHead className="text-right text-gray-400 font-sans tracking-wider uppercase text-xs">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {posts.map((post) => (
-            <TableRow key={post.id}>
-              <TableCell className="font-medium">{post.title}</TableCell>
+            <TableRow key={post.id} className="border-white/10 hover:bg-white/5">
+              <TableCell className="font-serif text-white text-lg">{post.title}</TableCell>
               <TableCell>
                 {post.published ? (
-                  <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold text-green-600 border-green-200 bg-green-50">
+                  <span className="inline-flex items-center rounded-sm border px-2.5 py-0.5 text-[10px] font-sans tracking-widest uppercase text-white border-white/20 bg-white/10">
                     Published
                   </span>
                 ) : (
-                  <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold text-gray-600 border-gray-200 bg-gray-50">
+                  <span className="inline-flex items-center rounded-sm border px-2.5 py-0.5 text-[10px] font-sans tracking-widest uppercase text-gray-500 border-white/10 bg-black">
                     Draft
                   </span>
                 )}
               </TableCell>
-              <TableCell>{new Date(post.createdAt).toLocaleDateString()}</TableCell>
+              <TableCell className="font-sans text-xs text-gray-400 tracking-wider">
+                {new Date(post.createdAt).toISOString().split('T')[0]}
+              </TableCell>
               <TableCell className="text-right space-x-2">
                 <Link href={`/blog/${post.id}`} target="_blank">
-                  <Button variant="ghost" size="sm">View</Button>
+                  <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white hover:bg-white/10 font-sans uppercase tracking-widest text-[10px]">View</Button>
                 </Link>
                 <Link href={`/dashboard/edit/${post.id}`}>
-                  <Button variant="outline" size="sm">Edit</Button>
+                  <Button variant="outline" size="sm" className="bg-transparent border-white/20 text-gray-300 hover:text-white hover:bg-white/10 font-sans uppercase tracking-widest text-[10px]">Edit</Button>
                 </Link>
                 <Button 
                   variant="destructive" 
                   size="sm" 
                   onClick={() => handleDelete(post.id)}
                   disabled={isPending}
+                  className="font-sans uppercase tracking-widest text-[10px] bg-red-900/50 hover:bg-red-900 text-red-200"
                 >
                   Delete
                 </Button>

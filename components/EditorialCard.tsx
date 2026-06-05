@@ -31,7 +31,7 @@ export default function EditorialCard({ post, variant = "grid" }: EditorialCardP
       <Link href={`/blog/${post.id}`} className="flex flex-col group block">
         {/* Massive Image Block */}
         <div className="w-full aspect-[16/9] md:aspect-[3/2] relative overflow-hidden border border-white/10 mb-6 p-2 bg-black">
-          <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+          <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover" />
         </div>
         
         <div className="flex flex-col text-center items-center px-4">
@@ -59,7 +59,7 @@ export default function EditorialCard({ post, variant = "grid" }: EditorialCardP
     return (
       <Link href={`/blog/${post.id}`} className="flex items-start gap-4 group py-3 border-b border-white/10 border-dashed last:border-0">
         <div className="w-16 h-16 shrink-0 relative border border-white/10 p-1 bg-black overflow-hidden">
-          <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+          <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col">
           <h3 className="text-sm font-serif text-white leading-snug group-hover:underline decoration-1 underline-offset-2 mb-1 line-clamp-2">
@@ -75,7 +75,7 @@ export default function EditorialCard({ post, variant = "grid" }: EditorialCardP
     return (
       <Link href={`/blog/${post.id}`} className="flex flex-col group">
         <div className="w-full aspect-[16/9] mb-3 border border-white/10 p-1 bg-black overflow-hidden">
-          <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover" />
         </div>
         <div className="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-sans">
           Technology
@@ -97,7 +97,7 @@ export default function EditorialCard({ post, variant = "grid" }: EditorialCardP
   return (
     <Link href={`/blog/${post.id}`} className="flex flex-col group h-full">
       <div className="w-full aspect-square relative border border-white/10 mb-4 p-1.5 bg-black overflow-hidden">
-        <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+        <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover" />
       </div>
       <div className="flex flex-col flex-grow">
         <div className="text-[11px] font-sans font-bold text-white mb-2 tracking-wide uppercase line-clamp-1">

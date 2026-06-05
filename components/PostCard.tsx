@@ -26,7 +26,7 @@ export default function PostCard({ post }: PostCardProps) {
     <Link href={`/blog/${post.id}`} className="flex flex-col group h-full">
       <div className="w-full aspect-[3/2] relative border border-white/10 mb-4 p-1.5 bg-black overflow-hidden">
         {thumbnailUrl ? (
-           <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+           <img src={thumbnailUrl} alt={post.title} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full relative bg-zinc-800">
             <div className="absolute inset-0 vintage-image-filter opacity-40 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] mix-blend-overlay"></div>

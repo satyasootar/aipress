@@ -1,58 +1,39 @@
-import { NextRequest } from "next/server";
-import { successResponse, errorResponse } from "@/lib/api-utils";
-import prisma from "@/lib/prisma";
-import { requireAuth } from "@/lib/auth";
-import { createPostSchema } from "@/schemas/post";
+import { NextResponse } from 'next/server';
+import prisma from '@/lib/prisma';
 
-export async function GET(req: NextRequest) {
+// GET all posts
+export async function GET() {
   try {
     const posts = await prisma.post.findMany({
-      where: { published: true },
-      orderBy: { createdAt: "desc" },
-      include: {
-        author: {
-          select: { name: true, email: true },
-        },
-      },
+      orderBy: { createdAt: 'desc' }
     });
-
-    return successResponse(posts);
-  } catch (error) {
-    console.error("GET Posts Error:", error);
-    return errorResponse("Internal server error", 500);
+    return NextResponse.json({ success: true, data: posts }, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function POST(req: NextRequest) {
+// POST a new post
+export async function POST(request: Request) {
   try {
-    let session;
-    try {
-      session = await requireAuth();
-    } catch (e) {
-      return errorResponse("Unauthorized", 401);
+    const body = await request.json();
+    const { title, content, authorId } = body;
+    
+    if (!title || !content || !authorId) {
+       return NextResponse.json({ success: false, error: "Missing required fields: title, content, authorId" }, { status: 400 });
     }
 
-    const body = await req.json();
-    const validatedFields = createPostSchema.safeParse(body);
-
-    if (!validatedFields.success) {
-      return errorResponse("Invalid input", 400);
-    }
-
-    const { title, content, published } = validatedFields.data;
-
-    const post = await prisma.post.create({
+    const newPost = await prisma.post.create({
       data: {
         title,
         content,
-        published: published ?? true, // For API creation, maybe default to true if not provided, or false. Schema defaults to false.
-        authorId: session.userId,
-      },
+        authorId,
+        published: true
+      }
     });
 
-    return successResponse(post, 201);
-  } catch (error) {
-    console.error("POST Post Error:", error);
-    return errorResponse("Internal server error", 500);
+    return NextResponse.json({ success: true, data: newPost }, { status: 201 });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }

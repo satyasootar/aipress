@@ -29,29 +29,30 @@ export default function LoginForm() {
   }, [state, router]);
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full max-w-md mx-auto bg-black border-white/10 rounded-sm shadow-2xl">
       <CardHeader>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>Enter your credentials to access your account</CardDescription>
+        <CardTitle className="font-serif text-3xl text-white">Login</CardTitle>
+        <CardDescription className="font-sans text-[10px] tracking-widest uppercase text-gray-500 mt-2">Enter your credentials to access your account</CardDescription>
       </CardHeader>
       <form action={formAction}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6 pt-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" required placeholder="m@example.com" />
+            <Label htmlFor="email" className="font-sans text-[10px] tracking-widest uppercase text-gray-400">Email</Label>
+            <Input id="email" name="email" type="email" required placeholder="m@example.com" className="bg-transparent border-white/20 text-white rounded-sm focus-visible:ring-0 focus-visible:border-white/50 font-sans" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="font-sans text-[10px] tracking-widest uppercase text-gray-400">Password</Label>
             <div className="relative">
               <Input 
                 id="password" 
                 name="password" 
                 type={showPassword ? "text" : "password"} 
                 required 
+                className="bg-transparent border-white/20 text-white rounded-sm focus-visible:ring-0 focus-visible:border-white/50 font-sans pr-10"
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -59,13 +60,13 @@ export default function LoginForm() {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col gap-4">
-          <Button type="submit" className="w-full" disabled={isPending}>
+        <CardFooter className="flex flex-col gap-4 pt-6 border-t border-white/5 mt-4">
+          <Button type="submit" className="w-full bg-white text-black hover:bg-gray-200 font-sans tracking-widest uppercase text-xs rounded-sm transition-colors h-12" disabled={isPending}>
             {isPending ? "Logging in..." : "Login"}
           </Button>
-          <div className="text-sm text-center text-gray-400 font-sans mt-2">
+          <div className="text-[11px] text-center text-gray-500 font-sans tracking-wide mt-2">
             Don't have an account?{" "}
-            <Link href="/signup" className="text-white hover:underline underline-offset-4">
+            <Link href="/signup" className="text-white hover:underline underline-offset-4 decoration-1">
               Create one
             </Link>
           </div>
