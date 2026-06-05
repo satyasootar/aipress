@@ -1,19 +1,44 @@
 import EditorialCard from "@/components/EditorialCard";
 import SectionHeader from "@/components/SectionHeader";
-import { dummyPosts } from "@/lib/data";
+import prisma from "@/lib/prisma";
 
-export const dynamic = "force-static";
+export const revalidate = 60; // Revalidate homepage every minute
 
-export default function Home() {
-  const heroLeftPosts = dummyPosts.slice(0, 2);
-  const heroFeaturedPost = dummyPosts[2];
-  const heroRightPosts = dummyPosts.slice(3, 7);
+export default async function Home() {
+  const allPosts = await prisma.post.findMany({
+    where: { published: true },
+    orderBy: { createdAt: 'asc' }, 
+    include: {
+      author: {
+        select: { name: true, email: true }
+      }
+    }
+  });
   
-  const dispatchesPosts = dummyPosts.slice(7, 11);
-  const superhumanPosts = dummyPosts.slice(11, 15);
-  const softwarePosts = dummyPosts.slice(15, 19);
-  const historyPosts = dummyPosts.slice(19, 23);
-  const podcastPosts = dummyPosts.slice(23, 27);
+  // Re-sort descending so newest are first
+  const posts = allPosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+  // We need at least 27 posts to perfectly fill the grid, if not we fallback
+  const heroLeftPosts = posts.slice(0, 2);
+  const heroFeaturedPost = posts[2] || posts[0];
+  const heroRightPosts = posts.slice(3, 7);
+  
+  const dispatchesPosts = posts.slice(7, 11);
+  const superhumanPosts = posts.slice(11, 15);
+  const softwarePosts = posts.slice(15, 19);
+  const historyPosts = posts.slice(19, 23);
+  const podcastPosts = posts.slice(23, 27);
+
+  if (posts.length === 0) {
+    return (
+      <div className="bg-black min-h-screen flex items-center justify-center text-gray-400 font-sans tracking-widest text-sm uppercase px-8 text-center">
+        <div>
+           <p className="mb-4">No database records found.</p>
+           <a href="/api/seed" className="text-white underline underline-offset-4 decoration-1">Click here to automatically generate 27 sample articles.</a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-black min-h-screen text-gray-100 pb-20">

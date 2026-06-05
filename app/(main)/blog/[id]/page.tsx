@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import PostActions from "@/components/PostActions";
+import { getThumbnailUrl } from "@/lib/utils/thumbnail";
 
 export const dynamic = "force-dynamic";
 
@@ -66,6 +67,10 @@ export default async function BlogPostPage({
           By <span className="text-white">{post.author.name || post.author.email}</span> •{" "}
           {new Date(post.createdAt).toLocaleDateString()}
         </p>
+      </div>
+
+      <div className="w-full aspect-[16/9] md:aspect-[3/2] relative border border-white/10 p-2 bg-black mt-8">
+        <img src={getThumbnailUrl(post.id)} alt={post.title} className="w-full h-full object-cover" />
       </div>
 
       <div 
