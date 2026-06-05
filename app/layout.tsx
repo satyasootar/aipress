@@ -24,7 +24,7 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakarta.variable} font-sans h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-slate-900">
+      <body className="min-h-full flex flex-col bg-white text-slate-900" suppressHydrationWarning>
         <Navbar />
         <main className="flex-1">
           {children}
