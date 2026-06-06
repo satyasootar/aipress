@@ -16,7 +16,7 @@ export default async function Home() {
   });
   
   // Re-sort descending so newest are first
-  const posts = allPosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  const posts = allPosts.sort((a: any, b: any) => b.createdAt.getTime() - a.createdAt.getTime());
 
   // We need at least 27 posts to perfectly fill the grid, if not we fallback
   const heroLeftPosts = posts.slice(0, 2);
@@ -48,7 +48,7 @@ export default async function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16">
           {/* Left Column: Stacked Compact */}
           <div className="lg:col-span-3 flex flex-col gap-8">
-            {heroLeftPosts.map(post => (
+            {heroLeftPosts.map((post: any) => (
               <EditorialCard key={post.id} post={post} variant="compact" />
             ))}
           </div>
@@ -64,7 +64,7 @@ export default async function Home() {
               MOST RECENT
             </div>
             <div className="flex flex-col">
-              {heroRightPosts.map(post => (
+              {heroRightPosts.map((post: any) => (
                 <EditorialCard key={post.id} post={post} variant="list-small" />
               ))}
             </div>
@@ -77,7 +77,7 @@ export default async function Home() {
           subtitle="A newsletter on the people, ideas, and companies building the future." 
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {dispatchesPosts.map(post => (
+          {dispatchesPosts.map((post: any) => (
             <EditorialCard key={post.id} post={post} variant="grid" />
           ))}
         </div>
@@ -98,7 +98,7 @@ export default async function Home() {
           subtitle="Everything you need to know about AI, productivity, and the future of work." 
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {superhumanPosts.map(post => (
+          {superhumanPosts.map((post: any) => (
             <EditorialCard key={post.id} post={post} variant="grid" />
           ))}
         </div>
@@ -109,7 +109,7 @@ export default async function Home() {
           subtitle="Strategy, culture, and craftsmanship for software teams." 
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {softwarePosts.map(post => (
+          {softwarePosts.map((post: any) => (
             <EditorialCard key={post.id} post={post} variant="grid" />
           ))}
         </div>
@@ -120,7 +120,7 @@ export default async function Home() {
           subtitle="Contextualizing current events through the lens of history." 
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {historyPosts.map(post => (
+          {historyPosts.map((post: any) => (
             <EditorialCard key={post.id} post={post} variant="grid" />
           ))}
         </div>
