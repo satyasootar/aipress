@@ -27,7 +27,7 @@ export default async function BlogPage() {
         <p className="text-muted-foreground">No posts found.</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
+          {posts.map((post: any) => (
             <PostCard key={post.id} post={post} />
           ))}
         </div>
