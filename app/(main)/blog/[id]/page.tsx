@@ -88,7 +88,7 @@ export default async function BlogPostPage({
 
       {/* Render existing comments */}
       <div className="mt-12 space-y-6">
-        {post.comments.map(comment => (
+        {post.comments.map((comment: any) => (
           <div key={comment.id} className="border-t border-dashed-faint pt-6">
             <div className="flex justify-between items-baseline mb-2">
               <span className="text-sm font-sans font-bold text-white uppercase tracking-wider">
