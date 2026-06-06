@@ -103,3 +103,38 @@ JWT_SECRET="your-super-secret-random-string"
 ## Assumptions & Limitations
 - **Images**: To avoid setting up S3 or Cloudinary for this assignment, post thumbnails are not uploaded by the user. Instead, the post ID is hashed to algorithmically map to a beautiful set of 14 pre-defined images in the `public/thumbnail` folder.
 - **Auth**: Authentication is handled via HTTP-only cookies and JWTs rather than NextAuth.js to explicitly demonstrate fundamental Next.js API routing and cookie management skills taught in class.
+
+---
+
+## How This Project Was Built (Development Journey)
+
+This section details the step-by-step process of how this architecture was achieved from scratch.
+
+### 1. Initialization and Foundation
+The project began by initializing a Next.js 16 App Router application with Tailwind CSS and TypeScript. I immediately established a custom design language focusing on a dark, high-end editorial aesthetic (`bg-black`, `font-serif` for headers, tracked-out `font-sans` for metadata). I integrated `shadcn/ui` to quickly scaffold base components like Cards, Inputs, and Buttons, but heavily customized their Tailwind classes to match the deep-black vintage theme.
+
+### 2. Database Design with Prisma & NeonDB
+Instead of a standard local SQLite database, I opted for a serverless PostgreSQL instance on NeonDB for production readiness. I designed a highly relational schema in `schema.prisma`:
+- `User`: Handles authentication credentials.
+- `Post`: Stores article content, title, and links back to the author.
+- `Comment` & `Like`: Enable social interaction, tracking user engagement with strict foreign key constraints.
+
+After running `npx prisma db push`, the cloud database was instantly ready to accept queries.
+
+### 3. Custom Authentication via Server Actions
+To deeply understand Next.js security, I bypassed heavy libraries like `NextAuth` and built a custom JWT cookie-based auth system. 
+- Using **Server Actions** (`actions/auth.ts`), I handle form submissions natively without writing client-side `fetch` logic. 
+- I use `bcryptjs` for hashing passwords and the powerful `jose` library for signing/verifying JWT tokens. 
+- The JWT is stored securely as an HTTP-only cookie, and a helper `getSession()` function makes it universally accessible in any Server Component.
+
+### 4. Headless Rich Text Editing
+For the authoring experience, standard `<textarea>` elements weren't enough. I integrated the **Tiptap Headless Editor**. By building a custom `Tiptap.tsx` client component, users can highlight text and apply formatting (Bold, Italic, Code, Blockquote) seamlessly. The editor outputs raw HTML, which is then securely stored in the PostgreSQL database and safely rendered inside the `EditorialCard` components using Next.js `dangerouslySetInnerHTML`.
+
+### 5. Advanced UI Engineering & The "Thumbnail Hash"
+To avoid the complexity and cost of an S3 bucket for this assignment, I engineered an algorithmic image mapping system (`lib/utils/thumbnail.ts`). It takes a Post's unique CUID, runs a mathematical hash on the string, and maps it perfectly to one of 14 high-quality vintage thumbnail images stored locally in `public/thumbnail/`. This ensures every blog post gets a beautiful, deterministic thumbnail without bloated database logic.
+
+### 6. Perfecting Rendering Strategies
+I carefully split the application to utilize Next.js's powerful caching mechanisms:
+- The **Homepage** uses ISR (`revalidate = 60`) because blog feeds update slowly, so there is no need to query the database on every single page load.
+- The **Blog Reader** and **Profile Page** use SSR (`force-dynamic`) because we need to see exactly who liked or commented on a post the millisecond it happens.
+- I built a `FooterWrapper.tsx` client component using `usePathname()` to ensure the footer renders selectively (only on the homepage and blog reader) without destroying the server-side architecture of the parent Layout.
