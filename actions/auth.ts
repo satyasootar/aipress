@@ -13,7 +13,7 @@ export async function register(prevState: any, formData: FormData) {
 
     if (!validatedFields.success) {
       return { 
-        error: "Invalid fields: " + validatedFields.error.issues.map(e => e.message).join(", "),
+        error: "Invalid fields: " + validatedFields.error.issues.map((e: any) => e.message).join(", "),
         success: false
       };
     }

@@ -62,7 +62,7 @@ export default async function ProfilePage() {
               {user.comments.length === 0 ? (
                 <p className="text-gray-500 font-sans text-sm">You haven't commented on anything yet.</p>
               ) : (
-                user.comments.map(comment => (
+                user.comments.map((comment: any) => (
                   <div key={comment.id} className="border border-white/10 p-4 bg-zinc-900/30">
                     <p className="text-white font-serif mb-2 leading-relaxed">"{comment.content}"</p>
                     <p className="text-xs font-sans text-gray-500 uppercase tracking-widest">
@@ -81,7 +81,7 @@ export default async function ProfilePage() {
               {user.likes.length === 0 ? (
                 <p className="text-gray-500 font-sans text-sm">You haven't liked any posts yet.</p>
               ) : (
-                user.likes.map(like => (
+                user.likes.map((like: any) => (
                   <div key={like.id} className="flex flex-col border-b border-dashed-faint pb-3 last:border-0">
                     <Link href={`/blog/${like.postId}`} className="text-white font-serif text-lg hover:underline underline-offset-4 mb-1">
                       {like.post.title}

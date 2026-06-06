@@ -46,7 +46,7 @@ export default function DashboardTable({ posts }: { posts: Post[] }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {posts.map((post) => (
+          {posts.map((post: any) => (
             <TableRow key={post.id} className="border-white/10 hover:bg-white/5">
               <TableCell className="font-serif text-white text-lg">{post.title}</TableCell>
               <TableCell>

@@ -20,7 +20,7 @@ export async function createPost(prevState: any, formData: FormData) {
     const validatedFields = createPostSchema.safeParse(parsedData);
 
     if (!validatedFields.success) {
-      return { error: "Invalid fields: " + validatedFields.error.issues.map(e => e.message).join(", "), success: false };
+      return { error: "Invalid fields: " + validatedFields.error.issues.map((e: any) => e.message).join(", "), success: false };
     }
 
     const { title, content, published } = validatedFields.data;

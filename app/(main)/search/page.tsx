@@ -45,7 +45,7 @@ export default async function SearchPage({
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {posts.map((post) => (
+            {posts.map((post: any) => (
               <EditorialCard key={post.id} post={post} variant="grid" />
             ))}
           </div>
